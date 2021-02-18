@@ -1,3 +1,6 @@
 [submodule "streamtar"]
 	path = streamtar
 	url = https://github.com/xloem/streamtar.git
+[submodule "gitlakepy"]
+	path = gitlakepy
+	url = https://github.com/xloem/gitlakepy.git
