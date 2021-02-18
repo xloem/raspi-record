@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 macs="MAC--$(ip addr show | sed -ne 's/.*link\/ether \([0-9a-fA-F:]*\).*/\1/p' | tr '\n:' -_)"
-uuids="$(lsblk -o UUID | tr '\n' -)"
+uuids="$(lsblk -o UUID | sort -ur | grep . | tr '\n' -)"
 name="$(hostname)-${uuids%-}-${macs%-}"
 GIT="$(type -p git)"
 absorb_raspiweirdness()
@@ -14,12 +14,12 @@ git()
 	set -o pipefail
 	"$GIT" "$@" 2>&1 | absorb_raspiweirdness
 }
-if ! [ -e .git ]
+if ! git describe --all >/dev/null 2>&1
 then
-	git init .
+	git init
 	git commit --allow-empty -m "$name"
 fi
-if ! [ -e .git/annex ]
+if ! git annex numcopies >/dev/null 2>&1
 then
 	echo $name
 	git annex init "$name"
