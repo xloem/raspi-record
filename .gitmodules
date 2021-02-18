@@ -1,0 +1,3 @@
+[submodule "streamtar"]
+	path = streamtar
+	url = https://github.com/xloem/streamtar.git
