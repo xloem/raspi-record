@@ -65,4 +65,4 @@ do
 	git annex copy --all --to=skynet --jobs=2 --debug
 	git annex sync
 done 2>&1 | absorb_raspiweirdness &
-GST_DEBUG=2 show_exitcode gst-launch-1.0 v4l2src blocksize=$((1024*1024)) ! queue ! videoconvert ! avenc_h264_omx ! matroskamux streamable=true ! fdsink | show_exitcode streamtar "$tarfile".live "$(date --iso=seconds).mkv"
+GST_DEBUG=2 show_exitcode gst-launch-1.0 --quiet v4l2src blocksize=$((1024*1024)) ! queue ! videoconvert ! avenc_h264_omx ! matroskamux streamable=true ! fdsink | show_exitcode streamtar "$tarfile".live "$(date --iso=seconds).mkv"
